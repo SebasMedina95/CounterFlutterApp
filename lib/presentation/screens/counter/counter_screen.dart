@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CounterScreen extends StatelessWidget {
+class CounterScreen extends StatefulWidget {
 
   const CounterScreen({super.key});
+
+  @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+
+  int clickCounter = 0;
+  String textClicksCounter = "Clicks";
 
   @override
   Widget build(BuildContext context) {
@@ -12,21 +21,26 @@ class CounterScreen extends StatelessWidget {
           centerTitle: true,
           title: const Text("Counter Screen"),
         ),
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('0', style: TextStyle(fontSize: 160, fontWeight: FontWeight.w100)),
-              Text("Cantidad de Clicks", style: TextStyle(fontSize: 20))
+              Text('$clickCounter', style: const TextStyle(fontSize: 160, fontWeight: FontWeight.w100)),
+              Text(textClicksCounter, style: const TextStyle(fontSize: 20))
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+
+            clickCounter += 1;
+            textClicksCounter = ( clickCounter == 1 ) ? "Click" : "Clicks";
+            setState(() {}); //Para que se vean los cambios reflejados en pantalla
+            
+          },
           child: const Icon( Icons.plus_one ),
         ),
     );
 
   }
-
 }
